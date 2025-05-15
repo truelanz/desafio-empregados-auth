@@ -25,11 +25,23 @@ public class EmployeeService {
 
 	@Transactional
 	public EmployeeDTO insert(EmployeeDTO dto) {
+		if (dto.getName() == null || dto.getName().isEmpty()) {
+		throw new IllegalArgumentException("Name must not be null or empty");
+		}
+
+		if (dto.getEmail() == null || !dto.getEmail().matches("^[\\w.-]+@[\\w.-]+\\.\\w{2,}$")) {
+			throw new IllegalArgumentException("Invalid email");
+		}
+
+		if (dto.getDepartmentId() == null) {
+			throw new IllegalArgumentException("Department must not be null");
+		}
 		Employee entity = new Employee();
 		entity.setName(dto.getName());
 		entity.setEmail(dto.getEmail());
 		entity.setDepartment(new Department(dto.getDepartmentId(), null));
 		entity = repository.save(entity);
+
 		return new EmployeeDTO(entity);
 	}
 }
