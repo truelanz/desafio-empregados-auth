@@ -65,7 +65,7 @@
 
 ### Criar entidades:
 
-![alt text](image.png)
+![alt text](/src/main/resources/image.png)
 
 Implementar classes e métodos das interfaces do `spring.security.core` nas entididades (models) e no service `UserService.java`;
 
